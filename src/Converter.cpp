@@ -123,7 +123,7 @@ namespace Converter {
 			std::vector<Vec4> joint_weights(weights, weights + hdr.num_vertices);
 
 			for (uint32_t i = 0; i < hdr.num_vertices; i++)
-				new (&vertex_data[i]) Vertex(vertices[i], uvs[i], 0, normals[i], Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), joint_ids[i], joint_weights[i]);
+				new (&vertex_data[i]) Vertex(vertices[i], uvs[i], 0, normals[i], Vec3{ 0.0f, 0.0f, 0.0f }, Vec3{ 0.0f, 0.0f, 0.0f }, joint_ids[i], joint_weights[i]);
 
 			assert(gltf.find("skins") != gltf.end());
 			const uint32_t inv_bind_matrix_accessor_location = gltf["skins"][0]["inverseBindMatrices"];
@@ -143,7 +143,7 @@ namespace Converter {
 		else
 		{
 			for (uint32_t i = 0; i < hdr.num_vertices; i++)
-				new (&vertex_data[i]) Vertex(vertices[i], uvs[i], 0, normals[i], Vec3(0.0f, 0.0f, 0.0f), Vec3(0.0f, 0.0f, 0.0f), uVec4(0, 0, 0, 0), Vec4(1.0f, 1.0f, 1.0f, 1.0f));
+				new (&vertex_data[i]) Vertex(vertices[i], uvs[i], 0, normals[i], Vec3{ 0.0f, 0.0f, 0.0f }, Vec3{ 0.0f, 0.0f, 0.0f }, uVec4{ 0, 0, 0, 0 }, Vec4{ 1.0f, 1.0f, 1.0f, 1.0f });
 		}
 
 		hdr.vertex_data = vertex_data;
@@ -170,7 +170,7 @@ namespace Converter {
 			return;
 		}
 		printf("Writing to file %s...\n", file_name.c_str());
-		file.write(data.asset_name.c_str(), data.asset_name.length());
+		file.write(data.asset_name.c_str(), data.asset_name.length() + 1);
 		file.write((const char*)&data.type, sizeof(uint32_t));
 		file.write((const char*)&data.num_vertices, sizeof(uint32_t));
 		file.write((const char*)&data.num_indices, sizeof(uint32_t));

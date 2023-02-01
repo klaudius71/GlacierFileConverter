@@ -9,9 +9,9 @@
 
 enum ASSET_TYPE : uint32_t
 {
-	MODEL				= 0b001,
-	SKINNED_MODEL		= 0b010,
-	SKINNED_ANIMATION	= 0b100
+	MODEL			  = 0b001,
+	SKINNED_MODEL	  = 0b010,
+	SKINNED_ANIMATION = 0b100
 };
 
 struct GlacierFileHdr
